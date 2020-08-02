@@ -1,5 +1,10 @@
 """
-Importing necessary libraries
+** Important **
+
+Download the model.h5 file from given link below and save it in required directory
+
+https://drive.google.com/file/d/1-xYqzzyI2jukKlarfmns0VuQVJBs3stj/view?usp=sharing
+
 """
 import cv2,mtcnn
 from mtcnn.mtcnn import MTCNN
@@ -9,8 +14,7 @@ from keras.applications.mobilenet_v2 import preprocess_input
 from tensorflow.keras.models import load_model
 import warnings
 warnings.filterwarnings('ignore')
-classifier = load_model('mask_detector.model') #Classifier used to predict mask or not mask
-
+classifier = load_model('model.h5') #Classifier for predicting mask or not mask
 
 
 #Initializing the front camera
@@ -43,9 +47,7 @@ while True:
     #     x2=x+w
     #     y2=y+h
     #     fc=frame[y:y2, x:x2] #capturing only faces from the frame
-    #     fc = cv2.resize(fc, (224, 224))
-    #     fc = img_to_array(fc) #Converting face image to array
-    #     fc = preprocess_input(fc)
+    #     fc = cv2.resize(fc, (150, 150)) # resizing the faces for prediction
     #     fcs.append(fc)
     #     locs.append((x, y, x2, y2))
     # # --End of Haar Cascade Classifier code--
@@ -66,9 +68,7 @@ while True:
         x2=x+w
         y2=y+h
         fc=frame[y:y2, x:x2]
-        fc= cv2.resize(fc, (224,224))
-        fc=img_to_array(fc)
-        fc= preprocess_input(fc)
+        fc= cv2.resize(fc, (150,150))
         fcs.append(fc)
         locs.append((x, y, x2, y2))
         cfd.append(confidence)
@@ -76,18 +76,21 @@ while True:
     # --End of mtcnn code--
 
 
-
+    conf=0
     if len(fcs) > 0:
         fcs = np.array(fcs, dtype="float32") # Just ensuring that images are in array form
         preds = classifier.predict(fcs, batch_size=32)
 
     for (bbox, pred) in zip(locs, preds):
         (x, y, x2, y2) = bbox
-        (m, nm) = pred
-        print(pred)
-        label = "Mask" if m>nm else "No Mask"
+        label = "Mask" if pred[0]>0.5 else "No Mask"
+        if label == "Mask":
+            conf= pred[0] * 100 # Confidence % of mask
+        else:
+            conf = (100 - pred[0] * 100) #Confidence% for non-mask
+
         color = (0, 255, 0) if label == "Mask" else (0, 0, 255) # green if mask else red
-        label = "{}: {:.2f}%".format(label, max(m, nm) * 100) # % of confidence
+        label = "{}: {:.2f}%".format(label, conf) # % of confidence
 
 
         cv2.rectangle(frame, (x, y), (x2, y2), color, 3)  # Putting rectangle of bbox in frames
