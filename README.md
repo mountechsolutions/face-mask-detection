@@ -1,6 +1,8 @@
 # Face-mask-detection
 
-### Aim: To detect whether the person is wearing face mask or not 
+<div align= "center">
+  <h3> Aim: To detect whether the person is wearing face mask or not </h3>
+</div>
 
 <div align= "center">
   <h4>Face Mask Detection system is built with OpenCV, Keras/TensorFlow using Deep Learning and Computer Vision concepts to detect face masks in real-time video streams.</h4>
