@@ -23,10 +23,12 @@
 - Matplotlib
 - Seaborn
 
+
 ## Installation guide:
 - Download the zip file of this repo or clone the repo
-- Install the required frameworks and libraries in a new environment 
-- Download the h5 file from <a href="https://drive.google.com/file/d/1-xYqzzyI2jukKlarfmns0VuQVJBs3stj/view?usp=sharing">here</a> and move it to the working directory
+- (optional) make a new environment
+- `pip install -r requirements.txt` 
+- If model is not available Download the h5 file from <a href="https://drive.google.com/file/d/1-xYqzzyI2jukKlarfmns0VuQVJBs3stj/view?usp=sharing">here</a> and move it to the working directory
 
 ## Working guide:
  - Open terminal and change the directory to the downloaded unzipped folder
@@ -35,6 +37,12 @@
  python face_detection_and_classification.py
  ```
  - Face Mask Detection will be done in real-time
- 
- ## :clap: Credits
- - <a href="https://www.pyimagesearch.com/2020/05/04/covid-19-face-mask-detector-with-opencv-keras-tensorflow-and-deep-learning/">pyimagesearch</a>
+
+## Retrain the Model
+- Upload `face_mask_detection.ipynb` file on google colab
+- Download the api key from kaggle
+- Run all the cells
+
+
+## :clap: Credits
+- <a href="https://www.pyimagesearch.com/2020/05/04/covid-19-face-mask-detector-with-opencv-keras-tensorflow-and-deep-learning/">pyimagesearch</a>
