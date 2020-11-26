@@ -33,9 +33,9 @@
 ## Working guide:
  - Open terminal and change the directory to the downloaded unzipped folder
  - Run the below command 
- ```
- python face_detection_and_classification.py
- ```
+```
+python face_detection_and_classification.py
+```
  - Face Mask Detection will be done in real-time
 
 ## Retrain the Model
