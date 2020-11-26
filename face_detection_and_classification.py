@@ -41,7 +41,7 @@ while True:
     # """
     # It is faster than mtcnn but less accurate to detect variety of faces
     # """
-    # hc = cv2.CascadeClassifier('haarcascade_frontalface_alt2.xml')
+    # hc = cv2.CascadeClassifier('./haarcascades/haarcascade_frontalface_alt2.xml')
     # hcfaces = hc.detectMultiScale(frame,1.2)
     # for (x,y,w,h) in hcfaces:
     #     x2=x+w
@@ -68,7 +68,7 @@ while True:
         x2=x+w
         y2=y+h
         fc=frame[y:y2, x:x2]
-        fc= cv2.resize(fc, (150,150))
+        fc= cv2.resize(fc, (100,100))
         fcs.append(fc)
         locs.append((x, y, x2, y2))
         cfd.append(confidence)
